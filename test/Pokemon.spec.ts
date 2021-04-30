@@ -1,17 +1,25 @@
 import {Pokemon} from "../src/pokemon";
+import {pikachu, dracofeu, carapute} from "./data";
 
-const pikachu = new Pokemon("pikachu", 100);
-const ninjask = new Pokemon("ninjask", 999);
+describe("pokemon", () => {
+    let random = () => 0.2;
 
-test("should be correctly named", () => {
-    expect(pikachu.name).toBe("pikachu");
-});
+    test("test name", () => {
+        expect(pikachu.name).toBe("pikachu");
+    });
 
-test("should get correct attacker", () => {
-    expect(Pokemon.firstAttacker(pikachu, ninjask)).toBe(ninjask);
-});
+    test("test correct attacker", () => {
+        expect(Pokemon.firstAttacker(pikachu, dracofeu)).toBe(dracofeu);
+    });
 
-test("should get correct attacker when speed is equal", () => {
-    const kicklee = new Pokemon("kicklee", 100);
-    expect(Pokemon.firstAttacker(pikachu, kicklee)).toBe(pikachu);
+    test("test first attack with speed", () => {
+        expect(Pokemon.firstAttacker(pikachu, carapute)).toBe(pikachu);
+    });
+
+    test("test hp", () => {
+        pikachu.attack(dracofeu, 0, random());
+        expect(dracofeu.hp).toBe(45);
+    });
+
+
 });
